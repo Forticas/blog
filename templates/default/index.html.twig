@@ -15,8 +15,8 @@
     <meta property="fb:admins" content="USER ID"/>
     <meta property="fb:app_id" content="APP ID"/>
     <meta name="twitter:card" content="summary"/>
-    {% if config.website.twitter not empty %}
-        <meta name="twitter:site" content="{{ config.website.twitter }}"/>
+    {% if not config.website.twitter is empty %}
+    <meta name="twitter:site" content="{{ config.website.twitter }}"/>
     {% endif %}
     <meta name="twitter:title" content="{{ config.website.name }}"/>
     <meta name="twitter:description" content="{{ config.website.description }}"/>

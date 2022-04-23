@@ -15,16 +15,17 @@
     <meta property="article:modified_time" content="DATE OF MODIFICATION"/>
     <meta property="article:section" content="SECTION NAME"/>
     <meta property="article:tag"
-          content="{% for tag in post.tags %}{{ post.tag }}{% if loop.index != loop.last %},{% endif %} {% endfor %}"/>
+          {# TODO fix tags #}
+          content="{% for tag in post.tags %}{{ tag.name }}{% if loop.index != loop.last %},{% endif %} {% endfor %}"/>
     <meta property="fb:admins" content="USER ID"/>
     <meta property="fb:app_id" content="APP ID"/>
     <meta name="twitter:card" content="summary"/>
-    {% if config.website.twitter not empty %}
-    <meta name="twitter:site" content="{{ config.website.twitter }}"/>
+    {% if not config.website.twitter is empty %}
+        <meta name="twitter:site" content="{{ config.website.twitter }}"/>
     {% endif %}
     <meta name="twitter:title" content="{{ config.website.name }}"/>
-    <meta name="twitter:description" content="DESCRIPTION OF PAGE CONTENT"/>
-    <meta name="twitter:image" content="LINK TO THE IMAGE FILE"/>
+    <meta name="twitter:description" content="{{ post.description }}"/>
+    <meta name="twitter:image" content="{{ post.image }}"/>
     <meta name="twitter:url" content="PERMALINK"/>
     <meta name="twitter:domain" content="DOMAIN NAME"/>
 
