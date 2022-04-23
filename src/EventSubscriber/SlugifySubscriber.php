@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Category;
+use App\Entity\Page;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
@@ -29,7 +30,7 @@ class SlugifySubscriber  implements EventSubscriberInterface
             return;
         }
         if (null === $object->getSlug()) {
-            if($object instanceof Category || $object instanceof Tag) {
+            if($object instanceof Category || $object instanceof Tag || $object instanceof Page) {
                 $object->setSlug(strtolower($this->slugger->slug($object->getName())));
                 return;
             }
