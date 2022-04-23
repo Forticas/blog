@@ -1,0 +1,9 @@
+<h1>List categories header</h1>
+<ul>
+    {% for categorie in categories %}
+        <li>
+            <a href="{{ path('list_post_by_category', {'slug': categorie.slug}) }}">{{ categorie.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+<hr>
