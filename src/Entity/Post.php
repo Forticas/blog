@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Post
 {
     #[ORM\Id]
@@ -44,6 +45,9 @@ class Post
 
     #[ORM\Column(type: 'boolean')]
     private $isPublished;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $mainCategorySlug;
     public function __construct()
     {
         //set isPublished to false by default
@@ -222,6 +226,21 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMainCategorySlug(): ?string
+    {
+        return $this->mainCategorySlug;
+    }
+
+    #[ORM\PrePersist]
+    public function setMainCategorySlug(): self
+    {
+        /** @var Category $firstCategory */
+        $firstCategory = $this->getCategories()->first();
+        $this->mainCategorySlug = $firstCategory->getSlug();
 
         return $this;
     }

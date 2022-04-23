@@ -28,8 +28,9 @@ class PostController extends AbstractController
         string         $post_slug
     ): Response
     {
-        $post = $this->cache->get('post_' . $post_slug, function () use ($post_slug) {
+        $post = $this->cache->get('post_' . $post_slug, function () use ($post_slug, $category_slug) {
             return $this->entityManager->getRepository(Post::class)->findOneBy([
+                'mainCategorySlug' => $category_slug,
                 'slug' => $post_slug,
                 'isPublished' => true,
             ]);
